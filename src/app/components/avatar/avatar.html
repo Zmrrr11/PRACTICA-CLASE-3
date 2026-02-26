@@ -1,10 +1,63 @@
 <div class="container">
-    <h2>Avatar</h2>
-    <div class="canvas-avatar">
-<div class="cuerpo">
-[style.backround-color]=
-</div>
+  <h2>Avatar</h2>
+  
+  <div class="canvas-avatar">
+    <div class="avatar-display">
+      <div class="cuerpo"
+           [class.girar-moneda]="estaGirando()"
+           [style.background-color]="colorFondo()"
+           [style.width.px]="tamano()"
+           [style.height.px]="tamano()">
 
+        <div class="ojos">
+          <div class="ojo"></div>
+          <div class="ojo"></div>
+          @if (tieneLentes()){
+            <div class="lentes"></div>
+          }
+        </div>
+        
+        <div class="boca">
+          @switch (tipoExpresion()){
+            @case (1) {<div class="feliz"></div>}
+            @case (2) {<div class="sorprendido"></div>}
+            @case (3) {<div class="serio"></div>}
+          }
+        </div>
+      </div>
+      
+      <h4 [style.color]="colorFondo()" class="nombre">
+        {{ nombreAvatar() }}
+      </h4>
+    </div>
+  </div>
+
+  <div class="controles">
+      <label>nombre:</label>
+      <input type="text" [value]="nombreAvatar()" (input)="actualizarNombre($event)">
+    <label>Color:
+       <input type="color" [value]="colorFondo()" (input)="cambiarColor($event)" >
+    </label>
+
+    <label>Zoom:
+      <input type="range" min="100" max="300" [value]="tamano()" (input)="cambiarTamano($event)" >
+    </label>
+
+    <button (click)="toggleLentes()" class="btn-lentes">
+      {{ tieneLentes() ? 'Quitar lentes' : 'Poner lentes' }}
+    </button>
+
+    <div class="expresiones">
+      <p>expresiones</p>
+      <button (click)="setExpresion(1)">Feliz</button>
+      <button (click)="setExpresion(2)">Sorprendido</button>
+      <button (click)="setExpresion(3)">Serio</button>
     </div>
 
+    <div class="acciones">
+      <p>Girado</p>
+      <button (click)="controlarGiro(true)" [disabled]="estaGirando()">Girar</button>
+      <button (click)="controlarGiro(false)" [disabled]="!estaGirando()">Parar</button>
+    </div>
+  </div>
 </div>
