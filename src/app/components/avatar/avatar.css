@@ -64,4 +64,13 @@
     label, p { font-weight: bold; font-size: 14px; }
     button { cursor: pointer; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
   }
+  
 }
+    .girar-moneda {
+  animation: monedaLoop 0.1s linear infinite;
+    }
+
+    @keyframes monedaLoop {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+    }

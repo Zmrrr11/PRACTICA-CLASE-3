@@ -9,14 +9,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './avatar.css',
 })
 export class AvatarComponent {
+
   colorFondo = signal<string>('#3498db');
   tamano = signal<number>(150);
   tieneLentes = signal<boolean>(false);
   tipoExpresion = signal<number>(1);
-  
-
-  nombreAvatar = signal<string>('avatar');
+  nombreAvatar = signal<string>('munieco');
   estaGirando = signal<boolean>(false);
+
+  actualizarNombre(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.nombreAvatar.set(input.value);
+  }
 
   cambiarColor(event: Event){
     const input = event.target as HTMLInputElement;
@@ -28,12 +32,6 @@ export class AvatarComponent {
     this.tamano.set(parseInt(input.value));
   }
 
-
-  actualizarNombre(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.nombreAvatar.set(input.value);
-  }
-
   toggleLentes(){
      this.tieneLentes.update(flag => !flag);
   }
@@ -41,7 +39,6 @@ export class AvatarComponent {
   setExpresion(tipo: number){
      this.tipoExpresion.set(tipo);
   }
-
 
   controlarGiro(estado: boolean) {
     this.estaGirando.set(estado);
